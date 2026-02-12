@@ -171,7 +171,7 @@ def get_ast_context(code: str, file_path: str) -> str:
                         else:
                             functions.append("<anonymous arrow>")
 
-            if cursor.goto_first_child():
+            if not visited_children and cursor.goto_first_child():
                 visited_children = False
             elif cursor.goto_next_sibling():
                 visited_children = False
@@ -546,7 +546,7 @@ def compute_complexity(code: str, file_path: str) -> List[FunctionComplexity]:
                 except Exception as ex:
                      print(f"ERROR calculating complexity for {name}: {str(ex)}")
 
-        if cursor.goto_first_child():
+        if not visited_children and cursor.goto_first_child():
             visited_children = False
         elif cursor.goto_next_sibling():
             visited_children = False
