@@ -1,25 +1,57 @@
 {
   "name": "devsentinel",
   "displayName": "DevSentinel",
-  "description": "Code Review & Architecture Assistant",
+  "description": "AI Code Review & Security Assistant",
   "version": "0.0.1",
+  "icon": "icon.png",
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": [
+    "Linters",
     "Other"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "devsentinel-sidebar",
+          "title": "DevSentinel",
+          "icon": "icon.png"
+        }
+      ]
+    },
+    "views": {
+      "devsentinel-sidebar": [
+        {
+          "type": "webview",
+          "id": "devsentinel.chatView",
+          "name": "DevSentinel"
+        }
+      ]
+    },
     "commands": [
       {
         "command": "devsentinel.review",
-        "title": "DevSentinel: Review Changes"
+        "title": "DevSentinel: Review File"
       },
       {
         "command": "devsentinel.roast",
         "title": "DevSentinel: Roast My Code"
+      },
+      {
+        "command": "devsentinel.securityScan",
+        "title": "DevSentinel: Security Scan"
+      },
+      {
+        "command": "devsentinel.complexity",
+        "title": "DevSentinel: Complexity Analysis"
+      },
+      {
+        "command": "devsentinel.checkConnection",
+        "title": "DevSentinel: Check Connection"
       }
     ],
     "configuration": {
@@ -29,6 +61,11 @@
           "type": "string",
           "default": "http://127.0.0.1:8000",
           "description": "URL of the DevSentinel Python Backend"
+        },
+        "devsentinel.requestTimeout": {
+          "type": "number",
+          "default": 300000,
+          "description": "Timeout in milliseconds for backend requests (increase if LLM is slow)."
         }
       }
     }
